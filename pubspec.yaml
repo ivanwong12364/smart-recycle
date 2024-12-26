@@ -44,6 +44,9 @@ dependencies:
   http: ^1.2.0
   # 图片压缩
   image: ^4.1.7
+  google_maps_flutter: ^2.5.3
+  location: ^5.0.3
+  geolocator: ^10.1.0
 
 dev_dependencies:
   flutter_test:
