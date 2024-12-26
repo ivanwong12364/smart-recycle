@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/auth_screen.dart';
 import 'firebase_options.dart';
-import 'dart:developer' as developer;
+import 'screens/home_screen.dart';
+import 'services/auth_service.dart';
 
 void main() async {
-  developer.log('', name: 'EGL_emulation', level: 0);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -13,16 +13,49 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final AuthService _authService = AuthService();
+  bool _initialized = false;
+  bool _isLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkAuth();
+  }
+
+  Future<void> _checkAuth() async {
+    final user = await _authService.checkLocalAuth();
+    setState(() {
+      _isLoggedIn = user != null;
+      _initialized = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (!_initialized) {
+      return MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      );
+    }
+
     return MaterialApp(
       title: 'Smart Recycle',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: AuthScreen(),
+      home: _isLoggedIn ? HomeScreen() : AuthScreen(),
     );
   }
 }
