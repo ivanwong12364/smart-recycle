@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to camera to take photos of recyclable items</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to photo library to select photos of recyclable items</string>
 </dict>
 </plist>

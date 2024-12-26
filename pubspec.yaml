@@ -38,6 +38,12 @@ dependencies:
   sqflite: ^2.3.2
   path: ^1.8.3
   get: ^4.6.6
+  # 相机和图片选择
+  image_picker: ^1.0.7
+  # HTTP 请求
+  http: ^1.2.0
+  # 图片压缩
+  image: ^4.1.7
 
 dev_dependencies:
   flutter_test:

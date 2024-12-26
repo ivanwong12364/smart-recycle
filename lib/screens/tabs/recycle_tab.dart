@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../image_classification_screen.dart';
+
 class RecycleTab extends StatelessWidget {
   final List<RecycleCategory> categories = [
     RecycleCategory(
@@ -48,6 +50,19 @@ class RecycleTab extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Recycling Guide'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.camera_alt),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ImageClassificationScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: categories.length,
