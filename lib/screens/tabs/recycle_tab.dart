@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../image_classification_screen.dart';
+import '../todo_list_screen.dart';
 
 class RecycleTab extends StatelessWidget {
   final List<RecycleCategory> categories = [
@@ -58,6 +59,17 @@ class RecycleTab extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ImageClassificationScreen(),
+                ),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.checklist),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TodoListScreen(),
                 ),
               );
             },
