@@ -56,6 +56,10 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: Colors.white,
       ),
       home: _isLoggedIn ? HomeScreen() : AuthScreen(),
+      routes: {
+        '/auth': (context) => AuthScreen(),
+        '/home': (context) => HomeScreen(),
+      },
     );
   }
 }
