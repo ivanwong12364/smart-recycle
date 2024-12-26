@@ -21,124 +21,127 @@ class ProfileTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // 用户信息卡片
-              Card(
-                elevation: 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      // 头像
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Color(0xFFE6D5BA),
-                        backgroundImage: _currentUser?.photoURL != null
-                            ? NetworkImage(_currentUser!.photoURL!)
-                            : null,
-                        child: _currentUser?.photoURL == null
-                            ? Text(
-                                _userInitials,
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  color: Colors.white,
-                                ),
-                              )
-                            : null,
-                      ),
-                      SizedBox(width: 16),
-                      // 用户名和邮箱
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              _currentUser?.displayName ?? 'User',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              _currentUser?.email ?? '',
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // 用户信息卡片
+                Card(
+                  elevation: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        // 头像
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Color(0xFFE6D5BA),
+                          backgroundImage: _currentUser?.photoURL != null
+                              ? NetworkImage(_currentUser!.photoURL!)
+                              : null,
+                          child: _currentUser?.photoURL == null
+                              ? Text(
+                                  _userInitials,
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : null,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 24),
-              
-              // GENERAL 部分
-              Text(
-                'GENERAL',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 8),
-              Card(
-                elevation: 0,
-                child: ListTile(
-                  leading: Icon(
-                    Icons.settings,
-                    color: Colors.grey,
-                  ),
-                  title: Text('Version'),
-                  trailing: Text(
-                    '1.0.0',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
-              ),
-              
-              SizedBox(height: 24),
-              
-              // ACCOUNT 部分
-              Text(
-                'ACCOUNT',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 8),
-              Card(
-                elevation: 0,
-                child: ListTile(
-                  leading: Icon(
-                    Icons.logout,
-                    color: Colors.red,
-                  ),
-                  title: Text(
-                    'Sign out',
-                    style: TextStyle(
-                      color: Colors.red,
+                        SizedBox(width: 16),
+                        // 用户名和邮箱
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _currentUser?.displayName ?? 'User',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                _currentUser?.email ?? '',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  onTap: () async {
-                    await _authService.signOut();
-                    Navigator.of(context).pushReplacementNamed('/auth');
-                  },
                 ),
-              ),
-            ],
+                SizedBox(height: 24),
+                
+                // GENERAL 部分
+                Text(
+                  'GENERAL',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Card(
+                  elevation: 0,
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.settings,
+                      color: Colors.grey,
+                    ),
+                    title: Text('Version'),
+                    trailing: Text(
+                      '1.0.0',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                ),
+                
+                SizedBox(height: 24),
+                
+                // ACCOUNT 部分
+                Text(
+                  'ACCOUNT',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Card(
+                  elevation: 0,
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.logout,
+                      color: Colors.red,
+                    ),
+                    title: Text(
+                      'Sign out',
+                      style: TextStyle(
+                        color: Colors.red,
+                      ),
+                    ),
+                    onTap: () async {
+                      await _authService.signOut();
+                      Navigator.of(context).pushReplacementNamed('/auth');
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
