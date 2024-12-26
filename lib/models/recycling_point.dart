@@ -4,7 +4,7 @@ class RecyclingPoint {
   final String address;
   final double latitude;
   final double longitude;
-  final String type; // 回收站类型
+  final String type;
   final String? contact;
   final String? openingHours;
 

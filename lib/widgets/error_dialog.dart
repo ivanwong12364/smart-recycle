@@ -4,11 +4,11 @@ void showErrorDialog(BuildContext context, String message) {
   showDialog(
     context: context,
     builder: (ctx) => AlertDialog(
-      title: Text('错误'),
+      title: Text('Error'),
       content: Text(message),
       actions: [
         TextButton(
-          child: Text('确定'),
+          child: Text('Ok'),
           onPressed: () {
             Navigator.of(ctx).pop();
           },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../services/auth_service.dart';
 import '../screens/home_screen.dart';
@@ -13,6 +14,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLogin = true;
+  final _obscurePassword = true.obs;
 
   Future<void> _handleSubmit() async {
     try {
@@ -113,9 +115,9 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
                 SizedBox(height: 8),
-                TextField(
+                Obx(() => TextField(
                   controller: _passwordController,
-                  obscureText: true,
+                  obscureText: _obscurePassword.value,
                   decoration: InputDecoration(
                     hintText: 'min. 8 characters',
                     hintStyle: TextStyle(color: Colors.grey),
@@ -129,9 +131,22 @@ class _AuthScreenState extends State<AuthScreen> {
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(color: Colors.grey[300]!),
                     ),
-                    suffixIcon: Icon(Icons.visibility_off, color: Colors.grey),
+                    suffixIcon: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: () {
+                          _obscurePassword.value = !_obscurePassword.value;
+                          print('Password visibility toggled: ${_obscurePassword.value}');
+                        },
+                        child: Icon(
+                          _obscurePassword.value ? Icons.visibility_off : Icons.visibility,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                )),
                 SizedBox(height: 24),
                 // Continue Button
                 ElevatedButton(

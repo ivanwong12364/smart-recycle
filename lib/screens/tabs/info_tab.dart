@@ -72,7 +72,6 @@ class _InfoTabState extends State<InfoTab> {
       });
 
       await for (var chunk in stream) {
-        // 处理每个数据块
         final lines = chunk.split('\n');
         for (var line in lines) {
           if (line.trim().isEmpty) continue;
